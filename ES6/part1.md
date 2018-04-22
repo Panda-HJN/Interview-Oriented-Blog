@@ -1,58 +1,92 @@
 前了个言
 
-一个语法为什么要存在?面对标准偶尔会冒出这样的问题。    
+一个新语法是为了解决什么问题而存在?面对标准偶尔会冒出这样的问题。    
 解决办法大致就是
-1. 触类旁通，去看看其他语言有没有这个语法，怎么用的
+1. 触类旁通，去看看其他语言类似的语法，做什么用的？
 2. 反证法，如果不用这个语法，该怎么实现需求
 
-所以写这个系列以做总结
 
-# let const
 
-先说个坑
+-----------------------------------
+## var的问题
+因为 ES5 的限制，为了一个简单的局部变量问题，要写繁琐的立即执行函数。
+
+```html
+    <ul id="box">
+        <li>点我显示0</li>
+        <li>点我显示1</li>
+        <li>点我显示2</li>
+        <li>点我显示3</li>
+        <li>点我显示4</li>   
+    </ul>
+    <script>
+        var liNodes = document.querySelectorAll('#box li')
+        for(var i= 0; i<liNodes.length;i++){
+            (function(){
+                var j = arguments[0]
+                liNodes[j].onClick=function(){
+                    console.log(j)
+                }
+            })(i)
+        }
+    </script>
+```
+变量提升也造成了不少麻烦，下面代码中 else 里不会被执行的代码却影响到了会执行的代码，声明了a。
+
 ```js
-function text1(){
+function test(){
     if(true){
        console.log(a)
     }else{
-       //
+       var a 
     }
 }
-// Uncaught ReferenceError: a is not defined
+test()// undefined
 ```
-显然结果会报错   
+大部分规范都要求所有 var 要放在函数开始处。以防变量提升导致的问题。   
 
-那么如果在不会被执行的else里声明呢？
+正是这些麻烦和不符合逻辑的结果催生了 let const 和**块级作用域**的出现。
 
-```js
-function text1(){
-    if(true){
-       console.log(b)
-    }else{
-       var b 
-    }
-}
-// undefined
-```
-不会被执行的else 却声明了b.（js good parts 这本书里建议了 所有var 要放在函数开始处。以防这些问题出现）
-
-正是这不符合逻辑的变量提升催生了 const let 的出现。
-
+## let const
+let 所声明的变量只会被声明一次，同一个作用域内再次声明会报错。   
+一组`{}`构成了一个块级作用域。   
+let 声明的变量会乖乖呆在所在位置,`let a`之前的地方是临时死区，即拿不到里面的a也拿不到外面的a.   
+使用a就报错
 ```js
 {
     let a = 1
+    let a = 2//Identifier 'a' has already been declared
     {
         console.log(a)
         // Uncaught ReferenceError: a is not defined
-        // 块级作用域即拿不到里面的也拿不到外面的
-        // let a 之前的地方是临时死去，使用就报错
-        let a = 2
+        // let a 之前的地方是临时死区，即拿不到里面的也拿不到外面的,使用a就报错
+        let a = 2//let 声明的变量会乖乖呆在所在位置
+        console.log(a) //2
         {
             let a = 3
         }
     }
 }
+console.log(a)// Uncaught ReferenceError: a is not defined
+```
 
-
-
-···
+有了let后 上面的代码可以简化成
+```html
+    <ul id="box">
+        <li>点我显示0</li>
+        <li>点我显示1</li>
+        <li>点我显示2</li>
+        <li>点我显示3</li>
+        <li>点我显示4</li>   
+    </ul>
+    <script>
+        var liNodes = document.querySelectorAll('#box li')
+        for(var i= 0; i<liNodes.length;i++){
+            let j = i                
+            liNodes[j].onClick=function(){
+                    console.log(j)
+            }
+        }
+    </script>
+```
+const 的行为和 let 完全一致，区别是 let 可以再次赋值。 const 则是声明了个不可变的常量。
