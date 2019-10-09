@@ -23,7 +23,7 @@
 
 
 5. altKey / ctrlKey / shiftKey   
-事件触发时,如果 alt / ctrl / shift 键也被按下,则返回 true, 用来判断是否事组合操作
+事件触发时,如果 alt / ctrl / shift 键也被按下,则返回 true, 用来判断是否是组合操作
 
 6. buttons   
 用来标识鼠标按下的一个或者多个按键。   
