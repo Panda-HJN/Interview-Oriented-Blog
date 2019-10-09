@@ -40,7 +40,8 @@
 也就是 : currentEvent.movementX = currentEvent.screenX - previousEvent.screenX.   
 这两个属性需要和
 `Element.requestPointerLock()`,
-`Document.exitPointerLock()`配合使用(存疑)
+`Document.exitPointerLock()`配合使用(存疑)   
 详见Pointer Lock API
 
+--------------------------------------
 [demo](https://jsbin.com/haconuxefo/edit?html,css,js,console,output)
