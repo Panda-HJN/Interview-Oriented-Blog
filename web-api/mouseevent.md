@@ -43,5 +43,25 @@
 `Document.exitPointerLock()`配合使用(存疑)   
 详见Pointer Lock API
 
---------------------------------------
+
+
 [demo](https://jsbin.com/haconuxefo/edit?html,css,js,console,output)
+
+-----------------------------------------------------------------------
+## 关于位置计算的补充
+- element.offsetLeft      
+元素自身的布局部分(除了margin)到Parent左侧内边距的距离(准确的说是Parent的padding和border的边界)
+- element.offsetTop   
+元素自身的布局部分(除了margin)到Parent顶部内边距的距离(准确的说是Parent的padding和border的边界)
+- element.offsetWidth   
+元素自身的布局宽度
+- element.offsetHeight   
+元素自身的布局高度
+
+
+- element.offsetParent   
+指向最近的包含该元素的**定位**元素.   (有 position 才能当Parent)
+如果没有定位的元素,则 offsetParent 为最近的 table, table cell 或body元素。
+(不是嵌套层级的爹,而是定位的爹)
+**注意box-sizing margin 等设置对其的影响**
+[demo](https://jsbin.com/nanonufeje/4/edit?html,css,js,console,output)
