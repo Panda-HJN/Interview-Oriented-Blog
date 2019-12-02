@@ -22,3 +22,10 @@
 - trimStart(str) 尾部去空格
 - truncate(str,{length:num,separator:"..."}) 字符串截断长度到num,并用 separator 结尾
 - words(str,reg) 拆str为由词组成的数组 reg可选,来设置匹配模式
+
+## Array
+- intersection([],[],[]...) 传入多个数组,给出他们的交集
+```js
+_.intersection([2, 3,1,7], [3, 7,1], [1, 2,6,3]);
+// =>[3, 1]
+```
