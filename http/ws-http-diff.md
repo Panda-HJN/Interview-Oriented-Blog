@@ -1,19 +1,19 @@
 # websocket 和 http 有什么联系?有什么不同?
 
-1. 共同点:都是基于tcp的
-2. ws 依赖于 http    
-ws 的建立或者说握手,首先发一个http(我见过的都是get)
-这个请求带有字段
-upgrade: websocket
-connection :upgrade 
-表明要建立一个长连接, 长连接方式是ws
-同时还会有字段
-sec-ws-key 一个客户端随机生成的字符串(用来表明身份)
-ws-v 版本
-如果服务器愿意建立这个ws
-这个http请求的响应头会返回给请求端
-sec-ws-accept: 内容是个key (鉴权用的)
-其他则是 版本 字符之类的东西
+1. 共同点:都是基于tcp的   
+2. ws 依赖于 http       
+ws 的建立或者说握手,首先发一个http(我见过的都是get)   
+这个请求带有字段   
+upgrade: websocket   
+connection :upgrade    
+表明要建立一个长连接, 长连接方式是ws   
+同时还会有字段   
+sec-ws-key 一个客户端随机生成的字符串(用来表明身份)   
+ws-v 版本   
+如果服务器愿意建立这个ws   
+这个http请求的响应头会返回给请求端   
+sec-ws-accept: 内容是个key (鉴权用的)   
+其他则是 版本 字符之类的东西   
 
 
 
