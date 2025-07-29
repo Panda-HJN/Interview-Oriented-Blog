@@ -137,3 +137,79 @@ graph TB
     class R,S,T,U,V,W plugin
     class X,Y,Z,AA,AB,AC output
 ```
+
+```mermaid
+graph TB
+    %% 项目结构
+    subgraph "大型React项目结构"
+        A1[src/index.js<br/>应用入口]
+        A2[src/pages/<br/>页面组件]
+        A3[src/components/<br/>通用组件]
+        A4[src/utils/<br/>工具函数]
+        A5[src/assets/<br/>静态资源]
+        A6[src/styles/<br/>样式文件]
+    end
+    
+    %% 多入口配置
+    A1 --> B1[Entry Points<br/>多入口配置]
+    A2 --> B1
+    B1 --> B2[vendor: 第三方库<br/>main: 主应用<br/>admin: 管理后台]
+    
+    %% 复杂Loader链
+    B2 --> C1[Loader Pipeline<br/>加载器管道]
+    C1 --> C2[Source Map<br/>sourcemap-loader]
+    C2 --> C3[TypeScript<br/>ts-loader]
+    C3 --> C4[React JSX<br/>babel-loader]
+    C4 --> C5[CSS Modules<br/>css-loader]
+    C5 --> C6[PostCSS<br/>postcss-loader]
+    C6 --> C7[SASS/SCSS<br/>sass-loader]
+    
+    %% 高级插件配置
+    C7 --> D1{生产环境插件}
+    D1 --> D2[代码分割<br/>SplitChunksPlugin]
+    D1 --> D3[CSS提取<br/>MiniCssExtractPlugin]
+    D1 --> D4[代码压缩<br/>TerserPlugin]
+    D1 --> D5[资源优化<br/>ImageminPlugin]
+    D1 --> D6[PWA支持<br/>WorkboxPlugin]
+    
+    %% 开发环境特性
+    D1 --> E1{开发环境特性}
+    E1 --> E2[热更新<br/>HotModuleReplacementPlugin]
+    E1 --> E3[开发服务器<br/>webpack-dev-server]
+    E1 --> E4[错误处理<br/>FriendlyErrorsPlugin]
+    E1 --> E5[进度显示<br/>ProgressPlugin]
+    
+    %% 性能优化策略
+    D2 --> F1[性能优化<br/>Performance Optimization]
+    F1 --> F2[代码分割策略<br/>- vendor分离<br/>- 路由懒加载<br/>- 动态import]
+    F1 --> F3[缓存策略<br/>- contenthash<br/>- 持久化缓存<br/>- DLL Plugin]
+    F1 --> F4[Tree Shaking<br/>- ES6模块<br/>- sideEffects配置<br/>- 无用代码消除]
+    
+    %% 多环境配置
+    F1 --> G1[多环境配置<br/>Multi-Environment]
+    G1 --> G2[开发环境<br/>webpack.dev.js]
+    G1 --> G3[测试环境<br/>webpack.test.js]
+    G1 --> G4[生产环境<br/>webpack.prod.js]
+    G1 --> G5[公共配置<br/>webpack.common.js]
+    
+    %% 监控和分析
+    G1 --> H1[构建监控<br/>Build Monitoring]
+    H1 --> H2[包分析<br/>Bundle Analyzer]
+    H1 --> H3[构建时间<br/>Speed Measure Plugin]
+    H1 --> H4[内存使用<br/>Memory Usage]
+    H1 --> H5[缓存命中率<br/>Cache Hit Rate]
+    
+    classDef project fill:#e3f2fd
+    classDef config fill:#f1f8e9
+    classDef loader fill:#fff8e1
+    classDef plugin fill:#fce4ec
+    classDef optimization fill:#f3e5f5
+    classDef monitoring fill:#e0f2f1
+    
+    class A1,A2,A3,A4,A5,A6 project
+    class B1,B2,G1,G2,G3,G4,G5 config
+    class C1,C2,C3,C4,C5,C6,C7 loader
+    class D1,D2,D3,D4,D5,D6,E1,E2,E3,E4,E5 plugin
+    class F1,F2,F3,F4 optimization
+    class H1,H2,H3,H4,H5 monitoring
+```
