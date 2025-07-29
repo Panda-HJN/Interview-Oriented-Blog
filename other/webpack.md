@@ -1,4 +1,4 @@
-
+```mermaid
 graph TB
     %% 多入口点处理
     subgraph "Entry Points 入口分析"
@@ -136,3 +136,4 @@ graph TB
     class H,I,J,K,L,M,AD,AE,AF loader
     class R,S,T,U,V,W plugin
     class X,Y,Z,AA,AB,AC output
+```
